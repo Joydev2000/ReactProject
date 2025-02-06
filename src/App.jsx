@@ -1,33 +1,12 @@
-import Header from "./Layout/Header";
+import React from 'react'
+import Route from './Routers/Route'
 
-
-
-// const router = createBrowserRouter([
-//   {
-//     path: '/',
-//     element: <Layout/>,
-//     children: [
-//       {
-//         path: "",
-//         element: <Home />
-//       },
-//       {
-//         path: "about",
-//         element: <About />
-//       },
-//       {
-//         path: "contact",
-//         element: <Contact />
-//       }
-//     ]
-//   }
-const App = () => {
+function App() {
   return (
-    <>
-      <div className="main w-full bg-black">
-        <Header />
-      </div>
-    </>
-  );
-};
-export default App;
+    <div>
+      <Route/>
+    </div>
+  )
+}
+
+export default App
