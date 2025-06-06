@@ -1,12 +1,14 @@
-import React from 'react'
+import { useContext } from 'react'
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Pagination } from 'swiper/modules';
 import { Link } from 'react-router-dom';
 import 'swiper/css';
 import 'swiper/css/pagination';
-
+import { context } from '../context/Context.jsx'
 
 function Home() {
+let {count, setCount} = useContext(context)
+
 
   return (
     <div>
@@ -40,18 +42,9 @@ function Home() {
         </SwiperSlide>
       </Swiper>
      </section>
-     {/* <section>
-      <div className="grid grid-flow-col grid-rows-6 gap-4">
-        <div className=' h-[500px] bg-blue-800'></div>
-        <div className=' h-[500px] bg-blue-600'></div>
-        <div className=' h-[500px] bg-zinc-900'></div>
-        <div className=' h-[500px] bg-zinc-900'></div>
-        <div className=' h-[500px] bg-blue-800'></div>
-        <div className=' h-[500px] bg-blue-600'></div>
-        <div className=' h-[500px] bg-zinc-900'></div>
-        <div className=' h-[500px] bg-zinc-900'></div>
-      </div>
-     </section> */}
+     
+     <button onClick={() => setCount(count + 1)} className='w-[60px] bg-slate-600 text-center'>click Me</button>
+     <h1>{count}</h1>
     <section>
     <div className="relative overflow-hidden bg-white">
       <div className="pt-16 pb-80 sm:pt-24 sm:pb-40 lg:pt-40 lg:pb-48">
@@ -134,7 +127,7 @@ function Home() {
               </div>
 
               <Link
-                to = "product"
+                to="product"
                 className="inline-block rounded-md border border-transparent bg-indigo-600 px-8 py-3 text-center font-medium text-white hover:bg-indigo-700"
               >
                 Shop Collection
@@ -146,7 +139,6 @@ function Home() {
     </div>
     </section>
     </div>
-
   )
 }
 

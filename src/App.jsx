@@ -1,11 +1,12 @@
-import React from 'react'
-import Route from './Routers/Route'
+import { Contextcomponents } from './context/Context.jsx'
+import Route from './Routers/Route.jsx'
+
 
 function App() {
   return (
-    <div>
-      <Route/>
-    </div>
+    <Contextcomponents>
+      <Route />
+    </Contextcomponents>
   )
 }
 

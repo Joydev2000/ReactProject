@@ -7,22 +7,21 @@ import Contact from '../Pages/Contact'
 import Product from '../Pages/Product'
 import ProductDetails from '../Pages/ProductDetails'
 
-
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <Layout/>,
+    element: <Layout />,
     children:[
         {
             path:"/",
-            element:<Home/>
+            element:<Home />
         },
         {
-            path:"about",
+            path:"about-us",
             element:<About/>
         },
         {
-            path:"contact",
+            path:"contact-us",
             element:<Contact/>
         },
         {
@@ -34,17 +33,11 @@ const router = createBrowserRouter([
             element:<ProductDetails/>
         }
     ]
-
   }
 ])
 
-
 function Route() {
-  return (
-    <div>
-      <RouterProvider router={router}/>
-    </div>
-  )
+  return <RouterProvider router={router}/>
 }
 
 export default Route

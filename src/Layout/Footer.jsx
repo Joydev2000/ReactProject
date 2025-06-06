@@ -1,9 +1,19 @@
-import React from 'react'
+
+import { useContext } from 'react'
 import { Link } from 'react-router-dom'
+import { context } from '../context/Context'
+
 
 function Footer() {
+
+    let {count, newcount} = useContext(context)
+
+
+  
   return (
     <div>
+        <h1 className="text-2xl font-bold text-center my-8">Context Count: {count}</h1>
+        <h1 className="text-2xl font-bold text-center my-8">New Count: {newcount}</h1>
       <footer className="bg-white border-y">
             <div className="mx-auto w-full max-w-screen-xl p-4 py-6 lg:py-8">
                 <div className="md:flex md:justify-between">
