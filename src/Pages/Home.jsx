@@ -1,4 +1,4 @@
-import { useContext } from 'react'
+import { useContext, useEffect } from 'react'
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Pagination } from 'swiper/modules';
 import { Link } from 'react-router-dom';
@@ -7,8 +7,46 @@ import 'swiper/css/pagination';
 import { context } from '../context/Context.jsx'
 
 function Home() {
-let {count, setCount} = useContext(context)
+  let {count, setCount, data, setData} = useContext(context)
+  
+  console.log('Current context data:', data) // Debug log
+  
+  const products = [
+    {
+      id: 1,
+      name: "Sony WH-1000XM3 Bluetooth Wireless Over Ear Headphones",
+      price: "$773",
+      imageSrc: "https://storage.googleapis.com/fir-auth-1c3bc.appspot.com/1692947383286-714WUJlhbLS._SL1500_.jpg",
+      imageAlt: "Sony WH-1000XM3 Headphones"
+    },
+    {
+      id: 2,
+      name: "Microsoft Xbox X/S Wireless Controller",
+      price: "$57",
+      imageSrc: "https://storage.googleapis.com/fir-auth-1c3bc.appspot.com/1692255251854-xbox.jpg",
+      imageAlt: "Microsoft Xbox Controller"
+    },
+    {
+      id: 3,
+      name: "Logitech G733 Lightspeed Wireless Gaming Headset",
+      price: "$384",
+      imageSrc: "https://storage.googleapis.com/fir-auth-1c3bc.appspot.com/1692257709689-logitech heaphone.jpg",
+      imageAlt: "Logitech G733 Headset"
+    },
+    {
+      id: 4,
+      name: "Sony WH-1000XM5 Wireless Headphones",
+      price: "$362",
+      imageSrc: "https://storage.googleapis.com/fir-auth-1c3bc.appspot.com/1692941008275-headphone3.jpg",
+      imageAlt: "Sony WH-1000XM5 Headphones"
+    }
+  ]
 
+  useEffect(() => {
+    console.log('Setting data in useEffect...') // Debug log
+    setData(products)
+    console.log('Data set in context:', products)
+  }, [setData]) // Added setData to dependency array
 
   return (
     <div>

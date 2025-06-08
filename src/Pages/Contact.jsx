@@ -1,35 +1,104 @@
-import { useForm } from "react-hook-form"
-
+// import { resolve } from "path";
+import { useForm } from "react-hook-form";
 
 export default function App() {
   const {
     register,
     handleSubmit,
-    watch,
-    formState: { errors },
-  } = useForm()
+    formState: { errors , isSubmitting },
+  } = useForm();
 
+  async function onSubmit(data) {
 
-  const onSubmit = (data) => console.log(data)
+    await new Promise((resolve) => setTimeout(resolve, 4000));
 
-
-  console.log(watch("example")) // watch input value by passing the name of it
-
+    console.log("submitted", data);
+  }
 
   return (
-    /* "handleSubmit" will validate your inputs before invoking "onSubmit" */
-    <form onSubmit={handleSubmit(onSubmit)}>
-      {/* register your input into the hook by invoking the "register" function */}
-      <input defaultValue="test" {...register("example")} />
+    <div className="container mx-auto p-6 max-w-2xl">
+      <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
+        <div className="space-y-2">
+          <label htmlFor="fullName" className="block text-sm font-medium">Name</label>
+          <input
+            id="fullName"
+            className="w-full p-2 border rounded-md"
+            {...register("FullName", { 
+              required: true, 
+              minLength: 3,
+              maxLength: 50 
+            })} 
+          />
+          {errors.FullName?.type === "required" && (
+            <p className="text-red-500 text-sm">Name is required</p>
+          )}
+          {errors.FullName?.type === "minLength" && (
+            <p className="text-red-500 text-sm">Name must be at least 3 characters</p>
+          )}
+        </div>
 
+        <div className="space-y-2">
+          <label htmlFor="phone" className="block text-sm font-medium">Phone Number</label>
+          <input
+            id="phone"
+            type="tel"
+            className="w-full p-2 border rounded-md"
+            {...register("Number", {
+              pattern: /^[0-9]{10}$/
+            })} 
+          />
+          {errors.Number?.type === "pattern" && (
+            <p className="text-red-500 text-sm">Please enter a valid 10-digit phone number</p>
+          )}
+        </div>
 
-      {/* include validation with required or other standard HTML validation rules */}
-      <input {...register("exampleRequired", { required: true })} />
-      {/* errors will return when field validation fails  */}
-      {errors.exampleRequired && <span>This field is required</span>}
+        <div className="space-y-2">
+          <label htmlFor="email" className="block text-sm font-medium">Email</label>
+          <input
+            id="email"
+            type="email"
+            className="w-full p-2 border rounded-md"
+            {...register("Email", {
+              required: true,
+              pattern: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i
+            })} 
+          />
+          {errors.Email?.type === "required" && (
+            <p className="text-red-500 text-sm">Email is required</p>
+          )}
+          {errors.Email?.type === "pattern" && (
+            <p className="text-red-500 text-sm">Please enter a valid email address</p>
+          )}
+        </div>
 
+        <div className="space-y-2">
+          <label htmlFor="message" className="block text-sm font-medium">Message</label>
+          <textarea
+            id="message"
+            className="w-full p-2 border rounded-md h-32"
+            {...register("Message", {
+              required: true,
+              minLength: 10
+            })} 
+          />
+          {errors.Message?.type === "required" && (
+            <p className="text-red-500 text-sm">Message is required</p>
+          )}
+          {errors.Message?.type === "minLength" && (
+            <p className="text-red-500 text-sm">Message must be at least 10 characters</p>
+          )}
+        </div>
 
-      <input type="submit" />
-    </form>
-  )
+        <div>
+          <button 
+            type="submit"
+            disabled={isSubmitting}
+            className={`w-full ${isSubmitting ? "bg-slate-600 opacity-50 cursor-not-allowed" : "bg-blue-500"} text-white py-2 px-4 rounded-md hover:bg-blue-600 transition-color`}
+          >
+            {isSubmitting ? "Submitting" : "Submit"}
+          </button>
+        </div>
+      </form>
+    </div>
+  );
 }
